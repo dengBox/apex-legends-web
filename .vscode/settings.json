@@ -1,0 +1,12 @@
+{
+  "eslint.format.enable": true,
+  "editor.codeActionsOnSave": {
+      "source.fixAll": true,
+      "eslint.autoFixOnSave" : false,
+  },
+  "editor.quickSuggestions": {
+    "strings": true,
+    "other": true,
+    "comments": true,
+  }
+}

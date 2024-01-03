@@ -1,0 +1,39 @@
+// Prefix
+$css-prefix : bo-;
+
+// Color
+$primary-color      : #0673FC; // 主题色
+$link-color         : #0673FC;
+$text-color         :#1F2E4D; // 文字主要颜色
+$link-hover-color   : tint($link-color, 20%);
+$link-active-color  : shade($link-color, 5%);
+
+// Base
+$component-background  : #fff;
+$background-color-base : #F1F3F5;
+$font-family            : Microsoft YaHei, PingFangSC-Regular, sans-serif;
+$font-size-base      : 12px;
+$line-hiehgt         :1.5;
+
+
+// Border color
+$border-color-base  : #E6E9F0; // outside
+$border-color-split : #e6e8f0; // inside
+$border-width-base  : 1px; // width of the border for a component
+$border-style-base  : solid; // style of a components border
+
+// Z-index
+$zindex-spin         : 8;
+$zindex-back-top     : 10;
+$zindex-modal        : 1000;
+$zindex-message      : 1010;
+$zindex-transfer     : 1060;
+$zindex-notification : 1010;
+$zindex-loading      : 2000;
+$zindex-fullscreen   : 2010;
+$zindex-content      : 2011; // 内容层级最高
+
+// Animation
+$animation-time : .3s;
+$transition-time : .2s;
+$ease-in-out : ease-in-out;
