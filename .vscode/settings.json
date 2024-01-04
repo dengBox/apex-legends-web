@@ -1,8 +1,8 @@
 {
   "eslint.format.enable": true,
   "editor.codeActionsOnSave": {
-      "source.fixAll": true,
-      "eslint.autoFixOnSave" : false,
+    "source.fixAll": "explicit",
+    "eslint.autoFixOnSave": "never"
   },
   "editor.quickSuggestions": {
     "strings": true,
