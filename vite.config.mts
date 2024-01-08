@@ -4,15 +4,16 @@ import vue from '@vitejs/plugin-vue'
 import UnoCSS from 'unocss/vite'
 import vitePluginEslint from 'vite-plugin-eslint'
 
-const HOST = "0.0.0.0"
+const HOST = '0.0.0.0'
 const REPLACEMENT = `${resolve(__dirname, './src')}/`
 export default ({ mode }) => {
   const isProduction = mode === 'production'
-  defineConfig({
-    base: "./",
+  return defineConfig({
+    base: './',
     server: {
       host: HOST,
       port: 10001,
+      open: true
     },
     plugins: [
       vue(),
@@ -23,9 +24,9 @@ export default ({ mode }) => {
       alias: [
         {
           find: '@/',
-          replacement: REPLACEMENT,
+          replacement: REPLACEMENT
         }
-      ],
+      ]
     }
   })
 }

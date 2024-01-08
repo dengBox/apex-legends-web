@@ -36,7 +36,7 @@ div {
 
 body {
   color     : $text-color;
-  font      : $font-size-base / $line-hiehgt $font-family;
+  font      : #{$font-size-base} / #{$line-hiehgt} $font-family;
   overflow-y: auto;
 }
 
@@ -54,25 +54,10 @@ body {
   border-radius: 4px;
 }
 
-// ::-webkit-scrollbar-thumb:hover {
-//   cursor: pointer;
-// }
+::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
+}
 
 ::-webkit-scrollbar-track {
   background-color: transparent;
-}
-
-// 最优尺寸
-@media only screen and (min-width: 1681px) {
-
-}
-
-// 中型尺寸
-@media only screen and (max-width: 1680px) and (min-width: 1281px) {
-
-}
-
-// 最小尺寸
-@media only screen and (max-width: 1280px) {
-
 }
