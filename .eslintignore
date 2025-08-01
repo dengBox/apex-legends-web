@@ -1,0 +1,18 @@
+## static source
+dist/
+lib/
+node_modules/
+
+## example project
+website/
+docs/
+
+## test
+tests/
+
+## tauri
+src-tauri/
+
+## config
+jsconfig.json
+

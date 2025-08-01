@@ -1,28 +1,32 @@
-import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Common from '../views/Common.vue'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import Login from '../views/login/LoginIndex.vue';
 
 // 自动导入其他 router 文件
-const routerList: Array<RouteRecordRaw> = []
+const routerList: Array<RouteRecordRaw> = [];
 
-const directives = import.meta.globEager('./model/**/')
+const directives = import.meta.glob('./model/*', { eager: true });
 for (const com in directives) {
   if (!/index.ts$/.test(com)) {
-    routerList.push(...(directives[com].default || []))
+    routerList.push(...((directives[com] as any).default || []));
   }
 }
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
-    component: Common
+    name: 'login',
+    component: Login
   },
   ...routerList
-]
+];
 
 const router = createRouter({
   history: createWebHistory('./'),
   routes
-})
+});
 
-export default router
+router.beforeEach((_to, _from, next) => {
+  next();
+});
+
+export default router;

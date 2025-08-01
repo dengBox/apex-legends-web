@@ -1,31 +1,68 @@
-import { resolve } from 'node:path'
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import UnoCSS from 'unocss/vite'
-import vitePluginEslint from 'vite-plugin-eslint'
+import { defineConfig } from 'vite';
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
 
-const HOST = "0.0.0.0"
-const REPLACEMENT = `${resolve(__dirname, './src')}/`
+import AutoImport from 'unplugin-auto-import/vite';
+import Components from 'unplugin-vue-components/vite';
+import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import UnoCSS from 'unocss/vite';
+
+import { resolve } from 'node:path';
+
+const host = process.env.TAURI_DEV_HOST;
+const REPLACEMENT = `${resolve(__dirname, './src')}/`;
+
+// https://vitejs.dev/config/
 export default ({ mode }) => {
-  const isProduction = mode === 'production'
-  defineConfig({
-    base: "./",
+  // const isProduction = mode === 'production';
+  return defineConfig({
+  // Vite options tailored for Tauri development and only applied in `tauri dev` or `tauri build`
+  // 1. prevent vite from obscuring rust errors
+    clearScreen: false,
+    // 2. tauri expects a fixed port, fail if that port is not available
     server: {
-      host: HOST,
-      port: 10001,
+      port: 2999,
+      strictPort: true,
+      host: host || false,
+      hmr: host
+        ? {
+            protocol: 'ws',
+            host,
+            port: 2999
+          }
+        : undefined,
+      watch: {
+      // 3. tell vite to ignore watching `src-tauri`
+        ignored: ['**/src-tauri/**']
+      }
     },
     plugins: [
       vue(),
+      vueJsx(),
       UnoCSS(),
-      !isProduction && vitePluginEslint()
+      AutoImport({
+        resolvers: [ElementPlusResolver()]
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()]
+      })
     ],
     resolve: {
       alias: [
         {
           find: '@/',
-          replacement: REPLACEMENT,
+          replacement: REPLACEMENT
         }
-      ],
+      ]
+    },
+    css: {
+      preprocessorOptions: {
+        scss: {
+          api: 'modern-compiler', // or "modern"
+          // silenceDeprecations: ['legacy-js-api'],
+          additionalData: '@use "@/assets/scss/color.scss" as *;'
+        }
+      }
     }
-  })
-}
+  });
+};
